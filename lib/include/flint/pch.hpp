@@ -2,9 +2,6 @@
 #define FLINT_PCH_HPP
 
 
-#include "flint/__config/config.hpp"
-#include "flint/__config/export.hpp"
-
 #include <csignal>
 #include <cstddef>
 #include <functional>
@@ -13,6 +10,9 @@
 #include <source_location>
 #include <span>
 #include <string_view>
+
+#include "flint/__config/config.hpp"
+#include "flint/__config/export.hpp"
 
 
 #endif //!FLINT_PCH_HPP

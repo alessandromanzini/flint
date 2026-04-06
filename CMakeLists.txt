@@ -13,14 +13,17 @@ project( flint
 # ========================================
 #
 # append cmake module path, making sure cmake finds our custom modules (.cmake)
-list( APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" )
+list( APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" )
 #
 include( mark_non_standard_sources )
+include( update_submodules )
 #
 #
 # ========================================
 # GLOBAL CONFIGURATION
 # ========================================
+#
+message( STATUS "Configuring project: ${PROJECT_NAME}" )
 #
 # c++ standard configuration
 set( CMAKE_CXX_STANDARD 26 )
@@ -45,7 +48,6 @@ message( STATUS "Build Type: ${CMAKE_BUILD_TYPE}" )
 # COMPILER-SPECIFIC SETTINGS
 # ========================================
 #
-set( CBRIDGE_SRC "${CMAKE_CURRENT_SOURCE_DIR}/lib/src/platform/compiler/" )
 if( CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang" )
     set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexperimental-library" )
 elseif( CMAKE_CXX_COMPILER_ID STREQUAL "GNU" )
@@ -55,6 +57,13 @@ else()
     message( FATAL_ERROR "Unsupported compiler... COMPILER_ID=\"${CMAKE_CXX_COMPILER_ID}\"" )
 endif()
 message( STATUS "Using ${CMAKE_CXX_COMPILER_ID} compiler configuration." )
+#
+#
+# ========================================
+# GIT SUBMODULES
+# ========================================
+#
+# update_submodules()
 #
 #
 # ========================================
@@ -85,10 +94,17 @@ option( FLINT_BUILD_TESTS "Build test executable" ON )
 # ADD SUBDIRECTORIES
 # ========================================
 #
+# submodules
+set( CMAKE_MESSAGE_LOG_LEVEL ERROR )
+#
+add_subdirectory( "external/ash" )
+#
+set( CMAKE_MESSAGE_LOG_LEVEL STATUS )
+#
 # core library
 add_subdirectory( "lib" )
 #
 # test executable (if exists)
-if( ${FLINT_BUILD_TESTS} AND IS_DIRECTORY "${CMAKE_SOURCE_DIR}/test" )
+if( ${FLINT_BUILD_TESTS} AND IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/test" )
     add_subdirectory( "test" )
 endif()

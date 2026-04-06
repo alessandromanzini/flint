@@ -4,23 +4,19 @@
 
 #ifdef FLINT_SHARED
 
-    #ifdef _MSC_VER
-        #ifdef FLINT_BUILD_LIB
+   #ifdef _MSC_VER
+      #ifdef FLINT_BUILD_LIB
          #define FLINT_EXPORT __declspec(dllexport)
-        #else
+      #else
          #define FLINT_EXPORT __declspec(dllimport)
-        #endif
-    #else
-        #define FLINT_EXPORT __attribute__((__visibility__("default")))
-    #endif
-
-#elifndef FLINT_STATIC
-
-    #define FLINT_EXPORT
+      #endif
+   #else
+      #define FLINT_EXPORT __attribute__((__visibility__("default")))
+   #endif
 
 #else
 
-static_assert( false, "API type must be defined!" );
+   #define FLINT_EXPORT
 
 #endif
 

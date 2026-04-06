@@ -1,12 +1,12 @@
 #include "flint/__module/library.hpp"
 
-#include <>
+#include <ash/ash.hpp>
 
 
 namespace flint
 {
    auto test( ) -> void
    {
-
+      ash::log( );
    }
 }

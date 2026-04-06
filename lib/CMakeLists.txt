@@ -6,10 +6,10 @@
 # CMAKE MODULES
 # ========================================
 #
-include(add_library_distribution_targets)
-include(generate_umbrella_header)
-include(mark_non_standard_sources)
-include(target_compile_options_strict)
+include( add_library_distribution_targets )
+include( generate_umbrella_header )
+include( mark_non_standard_sources )
+include( target_compile_options_strict )
 #
 #
 # ========================================
@@ -63,7 +63,7 @@ generate_umbrella_header(
 # ========================================
 #
 # Ash (diagnostic)
-target_link_libraries( ${OBJECT_TARGET} PUBLIC ash::static )
+target_link_libraries( ${OBJECT_TARGET} PUBLIC ash::ash-static )
 #
 # GLM (math library)
 #include( fetch_glm_macro )
